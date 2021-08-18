@@ -3,6 +3,10 @@
 version = 3
 
 [[package]]
+name = "array"
+version = "0.1.0"
+
+[[package]]
 name = "fntools"
 version = "0.1.0"
 

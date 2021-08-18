@@ -2,5 +2,6 @@
 
 members = [
   "fntools",
-  "smart-pointers"
+  "smart-pointers",
+  "array"
 ]
