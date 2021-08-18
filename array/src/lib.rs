@@ -1,3 +1,5 @@
+mod exercise;
+
 // This is a manual implementation of array
 // The only purpose of this is for learning
 // As much as possible:
