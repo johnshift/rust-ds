@@ -1,0 +1,13 @@
+### Useful iterator adaptors:
+  - zip
+  - map
+  - enumerate
+  - filter
+  - collect
+  - fold
+  - rev
+  - min/max
+  - sum
+  - take
+  - unique
+  - sorted_by
