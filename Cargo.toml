@@ -4,5 +4,6 @@ members = [
   "fntools",
   "smart-pointers",
   "array",
-  "hashmap"
+  "hashmap",
+  "linked-list"
 ]
