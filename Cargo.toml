@@ -3,5 +3,6 @@
 members = [
   "fntools",
   "smart-pointers",
-  "array"
+  "array",
+  "hashmap"
 ]
