@@ -18,3 +18,4 @@
 // Since we're only going to implement singly linked list, we will use Vec only
 
 pub mod bad_linked_list;
+pub mod ok_linked_list;
