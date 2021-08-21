@@ -6,5 +6,6 @@ members = [
   "array",
   "hashmap",
   "linked-list",
-  "iterators"
+  "iterators",
+  "ref-deref",
 ]

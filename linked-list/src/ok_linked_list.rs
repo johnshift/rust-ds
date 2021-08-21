@@ -47,16 +47,11 @@ impl<T> LinkedList<T> {
   }
 }
 
+// ================ into_iter() =================
+
 // Tuple structs are an alternative form of struct,
 // useful for trivial wrappers around other types.
 pub struct IntoIter<T>(LinkedList<T>);
-
-impl<T> LinkedList<T> {
-  pub fn into_iter(self) -> IntoIter<T> {
-    IntoIter(self)
-  }
-}
-
 impl<T> Iterator for IntoIter<T> {
   type Item = T;
   fn next(&mut self) -> Option<Self::Item> {
@@ -65,6 +60,66 @@ impl<T> Iterator for IntoIter<T> {
   }
 }
 
+impl<T> LinkedList<T> {
+  pub fn into_iter(self) -> IntoIter<T> {
+    IntoIter(self)
+  }
+}
+
+// ==============================================
+
+// ================== iter() ====================
+pub struct Iter<'a, T> {
+  next: Option<&'a Node<T>>,
+}
+
+impl<'a, T> Iterator for Iter<'a, T> {
+  type Item = &'a T;
+
+  fn next(&mut self) -> Option<Self::Item> {
+    self.next.map(|node| {
+      self.next = node.next.as_deref();
+      &node.value
+    })
+  }
+}
+
+impl<T> LinkedList<T> {
+  pub fn iter(&self) -> Iter<T> {
+    Iter {
+      // next: self.head.as_ref().map(|node| node),
+      next: self.head.as_deref(),
+    }
+  }
+}
+// ==============================================
+
+// ================ iter_mut() ==================
+pub struct IterMut<'a, T> {
+  next: Option<&'a mut Node<T>>,
+}
+
+impl<'a, T> Iterator for IterMut<'a, T> {
+  type Item = &'a mut T;
+
+  fn next(&mut self) -> Option<Self::Item> {
+    self.next.take().map(|node| {
+      self.next = node.next.as_deref_mut();
+      &mut node.value
+    })
+  }
+}
+
+impl<T> LinkedList<T> {
+  pub fn iter_mut(&mut self) -> IterMut<T> {
+    IterMut {
+      // next: self.head.as_ref().map(|node| node),
+      next: self.head.as_deref_mut(),
+    }
+  }
+}
+// ==============================================
+
 #[cfg(test)]
 mod tests {
 
@@ -72,7 +127,33 @@ mod tests {
   use std::mem::size_of_val;
 
   #[test]
-  pub fn test_ok_linked_list_iter() {
+  fn test_ok_linked_list_iter_mut() {
+    let mut list = LinkedList::new();
+    list.prepend(1);
+    list.prepend(2);
+    list.prepend(3);
+
+    let mut iter_mut = list.iter_mut();
+    assert_eq!(iter_mut.next(), Some(&mut 3));
+    assert_eq!(iter_mut.next(), Some(&mut 2));
+    assert_eq!(iter_mut.next(), Some(&mut 1));
+  }
+
+  #[test]
+  fn test_ok_linked_list_iter() {
+    let mut list = LinkedList::new();
+    list.prepend(1);
+    list.prepend(2);
+    list.prepend(3);
+
+    let mut iter = list.iter();
+    assert_eq!(iter.next(), Some(&3));
+    assert_eq!(iter.next(), Some(&2));
+    assert_eq!(iter.next(), Some(&1));
+  }
+
+  #[test]
+  pub fn test_ok_linked_list_into_iter() {
     let mut list = LinkedList::new();
     list.prepend(1);
     list.prepend(2);
