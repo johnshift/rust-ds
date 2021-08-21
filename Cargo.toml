@@ -5,5 +5,6 @@ members = [
   "smart-pointers",
   "array",
   "hashmap",
-  "linked-list"
+  "linked-list",
+  "iterators"
 ]
