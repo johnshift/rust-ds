@@ -78,11 +78,26 @@ impl<T: Sized> SinglyLinkedList<T> {
   fn remove(&mut self, index: usize) {
     self.elements.remove(index);
   }
+
+  // reverses elements
+  fn reverse(&mut self) {
+    self.elements.reverse();
+  }
 }
 
 #[cfg(test)]
 mod tests {
   use crate::SinglyLinkedList;
+
+  #[test]
+  fn singly_linked_list_reverse() {
+    let mut singly_list = SinglyLinkedList::new(10);
+    singly_list.append(16);
+    singly_list.append(5);
+
+    singly_list.reverse();
+    assert_eq!(singly_list.elements, vec![5, 16, 10]);
+  }
 
   #[test]
   #[should_panic(expected = "removal index (is 99) should be < len (is 2)")]
