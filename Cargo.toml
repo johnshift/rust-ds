@@ -8,5 +8,6 @@ members = [
   "linked-list",
   "iterators",
   "ref-deref",
-  "stacks-queues"
+  "stacks-queues",
+  "trees"
 ]
